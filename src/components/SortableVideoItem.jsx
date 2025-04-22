@@ -1,42 +1,28 @@
 "use client";
-
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
-import { Trash2, Pencil, Save } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { GripVertical, Pencil, Trash, TrashIcon } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-  AlertDialogTitle,
-  AlertDialogDescription,
-} from "@/components/ui/alert-dialog";
 
-export const SortableVideoItem = ({ video, onSave, onDelete }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: video.id,
-  });
+export const SortableVideoItem = ({ video, onSave, handleDeleteVideo }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: video.id });
+
+  const [edit, setEdit] = useState(false);
+  const [name, setName] = useState(video.name);
+  const [link, setLink] = useState(video.video_link);
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-  };
-
-  const [editing, setEditing] = useState(false);
-  const [editedVideo, setEditedVideo] = useState({
-    name: video.name,
-    video_link: video.video_link,
-  });
-
-  const handleSave = () => {
-    onSave(video.id, editedVideo);
-    setEditing(false);
   };
 
   return (
@@ -44,63 +30,51 @@ export const SortableVideoItem = ({ video, onSave, onDelete }) => {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      {...listeners}
-      className="flex items-start justify-between p-4 mb-2 bg-gray-100 border rounded-md"
+      className="flex items-center gap-2 p-3 border rounded-md bg-gray-50"
     >
-      <div className="flex-1 space-y-2">
-        {editing ? (
-          <>
-            <Input
-              value={editedVideo.name}
-              onChange={(e) => setEditedVideo({ ...editedVideo, name: e.target.value })}
-              placeholder="Video nomi"
-            />
-            <Input
-              value={editedVideo.video_link}
-              onChange={(e) => setEditedVideo({ ...editedVideo, video_link: e.target.value })}
-              placeholder="Video linki"
-            />
-          </>
-        ) : (
-          <>
-            <p className="font-semibold">{video.name}</p>
-            <p className="text-sm text-muted-foreground">{video.video_link}</p>
-          </>
-        )}
+      <div {...listeners} className="cursor-grab">
+        <GripVertical className="text-gray-500" />
       </div>
 
-      <div className="flex flex-col gap-2 ml-4 mt-1">
-        {editing ? (
-          <Button size="icon" variant="outline" onClick={handleSave}>
-            <Save className="w-4 h-4" />
-          </Button>
-        ) : (
-          <Button size="icon" variant="outline" onClick={() => setEditing(true)}>
+      {edit ? (
+        <div className="flex flex-col w-full gap-2">
+          <Input value={name} onChange={(e) => setName(e.target.value)} />
+          <Input value={link} onChange={(e) => setLink(e.target.value)} />
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                onSave(video.id, name, link);
+                setEdit(false);
+              }}
+            >
+              Saqlash
+            </Button>
+            <Button variant="ghost" onClick={() => setEdit(false)}>
+              Bekor qilish
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="flex-1">
+            <p className="font-medium">{video.name}</p>
+            <p className="text-sm text-muted-foreground truncate">
+              {video.video_link}
+            </p>
+          </div>
+          <Button size="sm" onClick={() => setEdit(true)}>
             <Pencil className="w-4 h-4" />
           </Button>
-        )}
-
-        {/* O‘chirish alert dialog */}
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button size="icon" variant="destructive">
-              <Trash2 className="w-4 h-4" />
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Haqiqatan ham o‘chirmoqchimisiz?</AlertDialogTitle>
-              <AlertDialogDescription>
-                Bu amalni bekor qilib bo‘lmaydi. Video bazadan o‘chiriladi.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Yo‘q</AlertDialogCancel>
-              <AlertDialogAction onClick={() => onDelete(video.id)}>Ha, o‘chirish</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
+          <Button
+            variant={"destructive"}
+            size="sm"
+            onClick={() => handleDeleteVideo(video.id)}
+          >
+            <TrashIcon className="w-4 h-4" />
+          </Button>
+        </>
+      )}
     </div>
   );
 };
