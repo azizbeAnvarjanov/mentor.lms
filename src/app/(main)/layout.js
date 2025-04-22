@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
+import "../globals.css";
+import Navbar from "@/components/Navbar";
+import { TeacherProvider } from "../context/TeacherContext";
+import SecurityLayer from "@/components/SecurityLayer";
+import { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,7 +25,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <TeacherProvider>
+          {/* <SecurityLayer /> */}
+          <Toaster position="top-center" />
+          <Navbar />
+          <main className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 pt-20">
+            {children}
+          </main>
+        </TeacherProvider>
       </body>
     </html>
   );
