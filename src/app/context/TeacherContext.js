@@ -20,10 +20,10 @@ export function TeacherProvider({ children }) {
         } = await supabase.auth.getUser();
 
         if (user) {
-            setUser(user)
+          setUser(user);
           const { data: teacherData, error } = await supabase
             .from("teachers")
-            .select("*")
+            .select("*, teachers_departments (name)")
             .eq("teacher_id", user.id)
             .single();
 
@@ -42,9 +42,6 @@ export function TeacherProvider({ children }) {
 
     fetchTeacher();
   }, []);
-
-
-
 
   return (
     <TeacherContext.Provider value={{ user, teacher, loading }}>

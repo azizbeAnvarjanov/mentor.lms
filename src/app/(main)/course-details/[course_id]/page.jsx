@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import BannerUpload from "@/components/BannerUpload";
 import CoursePublishToggle from "@/components/CoursePublishToggle";
-import { PencilLine } from "lucide-react";
+import { Pen, PencilLine } from "lucide-react";
 import CreateChapterForm from "@/components/CreateChapterForm";
 import BackButton from "@/components/BackButton";
 import { useCourseDetails } from "@/app/actions/CourseDetailsActions";
@@ -87,8 +87,8 @@ export default function CourseDetailsPage() {
                     {course.description || "Tavsif mavjud emas"}
                   </p>
                   <div className="flex absolute right-3 top-3">
-                    <Button onClick={() => setEditing(true)}>
-                      <PencilLine />
+                    <Button variant="outline" onClick={() => setEditing(true)}>
+                      <Pen />
                     </Button>
                   </div>
                 </div>

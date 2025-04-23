@@ -50,13 +50,13 @@ function SortableChapter({ chapter, course_id }) {
         </div>
         <div className="flex items-center text-sm gap-2">
           <p
-            className={`font-semibold px-2 text-white rounded-full ${
+            className={`font-semibold px-3 text-white rounded-full ${
               chapter.chapter_status === "false"
                 ? "bg-gray-600"
                 : "bg-green-600"
             }`}
           >
-            {chapter.chapter_status === "false" ? "draft" : "published"}
+            {chapter.chapter_status === "false" ? "Faol emas" : "Faol"}
           </p>
           <Link
             href={`/course-details/${course_id}/chapter/${chapter.chapter_id}`}
@@ -152,7 +152,7 @@ const CreateChapterForm = ({ course_id }) => {
           <div className="flex items-center gap-3">
             <h3 className="text-lg font-semibold">Mavzular</h3>
 
-            <Button onClick={() => setShowForm(true)}>
+            <Button variant="outline" onClick={() => setShowForm(true)}>
               <Plus />
             </Button>
           </div>

@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/select";
 import { SortableVideoItem } from "./SortableVideoItem";
 import { useVideoUploadingDetails } from "@/app/actions/VideoUploadActions";
+import { CircleFadingPlus } from "lucide-react";
 
 export default function VideoUpload({
   chapter_id,
@@ -61,17 +62,16 @@ export default function VideoUpload({
 
   return (
     <div className="p-4 bg-white border rounded-xl space-y-4">
-      <h2 className="text-lg font-semibold">Video joylash</h2>
-      <div className="mb-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Video joylash</h2>
         <Button onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Yopish" : "Video qo‘shish"}
+          {showForm ? "Yopish" : "Video qo‘shish"} <CircleFadingPlus />
         </Button>
-        <br />
       </div>
 
       {showForm && (
-        <div className="space-y-2 border border-gray-300 p-4 rounded-md bg-gray-50">
-          <div className="space-y-2">
+        <div className="space-y-2">
+          <div className="space-y-2 bg-white">
             <Label>Joylash turi:</Label>
             <Select value={uploadType} onValueChange={setUploadType}>
               <SelectTrigger className="w-full">
@@ -88,14 +88,14 @@ export default function VideoUpload({
 
           {uploadType === "link" && (
             <>
-              <label className="block text-sm font-medium">Video nomi</label>
+              <label className="block text-sm font-medium">Video nomini yozing</label>
               <Input
                 type="text"
                 value={videoName}
                 onChange={(e) => setVideoName(e.target.value)}
               />
               <label className="block text-sm font-medium">
-                YouTube video link
+                Video linkini qo'ying
               </label>
               <Input
                 type="text"

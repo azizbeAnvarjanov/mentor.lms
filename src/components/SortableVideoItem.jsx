@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { GripVertical, Pencil, Trash, TrashIcon } from "lucide-react";
+import { Grip, GripVertical, Pencil, Trash, TrashIcon } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -33,7 +33,7 @@ export const SortableVideoItem = ({ video, onSave, handleDeleteVideo }) => {
       className="flex items-center gap-2 p-3 border rounded-md bg-gray-50"
     >
       <div {...listeners} className="cursor-grab">
-        <GripVertical className="text-gray-500" />
+        <Grip className="text-gray-500" />
       </div>
 
       {edit ? (
@@ -59,9 +59,6 @@ export const SortableVideoItem = ({ video, onSave, handleDeleteVideo }) => {
         <>
           <div className="flex-1">
             <p className="font-medium">{video.name}</p>
-            <p className="text-sm text-muted-foreground truncate">
-              {video.video_link}
-            </p>
           </div>
           <Button size="sm" onClick={() => setEdit(true)}>
             <Pencil className="w-4 h-4" />

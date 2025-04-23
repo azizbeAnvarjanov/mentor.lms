@@ -19,8 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.jsx";
+import { CircleFadingPlus } from "lucide-react";
 
-export default function CreateCourseDialog() {
+export default function CreateCourseDialog({ teacher }) {
+  console.log(teacher);
+
   const [name, setName] = useState("");
   const [level, setLevel] = useState("1");
   const [loading, setLoading] = useState(false);
@@ -43,7 +46,9 @@ export default function CreateCourseDialog() {
     setLoading(true);
     const { data, error } = await supabase
       .from("courses_duplicate")
-      .insert([{ name, kurs: parseInt(level), course_id }])
+      .insert([
+        { name, kurs: parseInt(level), course_id, department: teacher.kafedra },
+      ])
       .select()
       .single();
 
@@ -60,21 +65,21 @@ export default function CreateCourseDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default">Kurs yaratish</Button>
+        <Button variant="default">Fan yaratish <CircleFadingPlus /></Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Yangi kurs yaratish</DialogTitle>
+          <DialogTitle>Yangi fan yaratish</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <Input
-            placeholder="Kurs nomi"
+            placeholder="Fan nomi"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <Select value={level} onValueChange={(val) => setLevel(val)}>
             <SelectTrigger>
-              <SelectValue placeholder="Kurs darajasi" />
+              <SelectValue placeholder="Fan kursi" />
             </SelectTrigger>
             <SelectContent>
               {[1, 2, 3, 4, 5, 6].map((num) => (

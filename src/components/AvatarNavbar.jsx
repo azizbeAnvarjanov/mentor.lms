@@ -80,12 +80,7 @@ export default function AvatarNavbar({ user, teacher }) {
               <span>Fan baza</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/applications" className="flex items-center">
-              <FileText size={16} className="opacity-60" aria-hidden="true" />
-              <span>Ariza topshirish</span>
-            </Link>
-          </DropdownMenuItem>
+
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout} className="cursor-pointer">

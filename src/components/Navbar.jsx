@@ -24,7 +24,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex items-center space-x-4">
-            <CreateCourseDialog />
+            <CreateCourseDialog teacher={teacher}/>
             <AvatarNavbar user={user} teacher={teacher} />
           </div>
         </div>

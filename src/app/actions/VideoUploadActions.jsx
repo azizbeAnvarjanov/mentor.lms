@@ -3,16 +3,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
-import {
-    arrayMove,
-    SortableContext,
-    verticalListSortingStrategy,
-  } from "@dnd-kit/sortable";
-export function useVideoUploadingDetails(
-  chapter_id,
-  setVideosLength,
-  changeStatusChapter
-) {
+import { arrayMove } from "@dnd-kit/sortable";
+export function useVideoUploadingDetails(chapter_id, setVideosLength) {
   const supabase = createClient();
   const [uploadType, setUploadType] = useState("link");
   const [videoLink, setVideoLink] = useState("");

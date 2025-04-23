@@ -126,7 +126,7 @@ export default function ChapterEdit() {
               checked={status}
               onCheckedChange={(val) => {
                 if (videosLength < 1) {
-                  toast.error("Avval video linkni kiriting!");
+                  toast.error("Faollashtirish uchun mavzuga video joylang!");
                   return;
                 }
                 setStatus(val); // bu val => boolean (true/false)
