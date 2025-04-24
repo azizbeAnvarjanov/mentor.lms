@@ -7,11 +7,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
-import { Pen } from "lucide-react";
+import { Pen, Save } from "lucide-react";
 import BackButton from "@/components/BackButton";
 
 import VideoUpload from "@/components/VideoUpload";
 import { useChapterDetails } from "@/app/actions/chapterDetailsActions";
+import UploadPPTDialog from "@/components/UploadPPTDialog";
+import TabsFiles from "@/components/TabsFiles";
 
 export default function ChapterEdit() {
   const { chapter_id } = useParams();
@@ -39,8 +41,15 @@ export default function ChapterEdit() {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <BackButton />
-        <h2 className="text-xl font-semibold">Mavzuni tahrirlash</h2>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-3">
+            <BackButton />
+            <h2 className="text-xl font-semibold">Mavzuni tahrirlash</h2>
+          </div>
+        </div>
+        <Button onClick={handleSave} variant={"outline"}>
+          Barchasini saqlash <Save />
+        </Button>
       </div>
       <div className="flex items-start gap-4 mt-3">
         <div className="w-[50%]">
@@ -50,7 +59,7 @@ export default function ChapterEdit() {
               {editName ? (
                 <div className="border bg-white  p-3 rounded-sm">
                   <div className="flex items-center justify-between mb-2">
-                    <h1 className="text-sm font-medium">Chapter nomi</h1>
+                    <h1 className="text-sm font-medium">Mavzu nomi</h1>
                     <Button size={"sm"} onClick={() => setEditName(false)}>
                       Saqlash
                     </Button>
@@ -63,7 +72,7 @@ export default function ChapterEdit() {
               ) : (
                 <div className="border bg-white  p-3 rounded-sm">
                   <div className="flex items-center justify-between">
-                    <h1 className="text-sm font-medium">Chapter nomi</h1>
+                    <h1 className="text-sm font-medium">Mavzu nomi</h1>
 
                     <Button variant="outline" onClick={() => setEditName(true)}>
                       <Pen />
@@ -81,7 +90,7 @@ export default function ChapterEdit() {
               {editDescription ? (
                 <div className="mt-4 bg-white border  p-3 rounded-sm">
                   <div className="flex items-center justify-between mb-2">
-                    <h1 className="font-medium">Chapter tavsifi</h1>
+                    <h1 className="font-medium">Mavzu tavsifi</h1>
                     <Button size="sm" onClick={() => setEditDescription(false)}>
                       Saqlash
                     </Button>
@@ -113,9 +122,8 @@ export default function ChapterEdit() {
                 </div>
               )}
             </div>
-
             <br />
-            <Button onClick={handleSave}>Barchasini saqlash</Button>
+            <TabsFiles chapter_id={chapter_id}/>
           </div>
         </div>
         <div className="w-[50%]">
