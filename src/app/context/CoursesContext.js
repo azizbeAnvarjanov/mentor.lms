@@ -8,13 +8,11 @@ const CoursesContext = createContext(null);
 
 export function CoursesProvider({ children }) {
   const { user, teacher } = useTeacher();
-  console.log(teacher?.kafedra);
 
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
   const [department, setDepartment] = useState([]);
   const supabase = createClient();
-  console.log(department);
 
   useEffect(() => {
     if (teacher) {

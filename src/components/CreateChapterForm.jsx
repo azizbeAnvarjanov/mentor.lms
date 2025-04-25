@@ -146,12 +146,11 @@ const CreateChapterForm = ({ course_id }) => {
   };
 
   return (
-    <div className="p-4 border rounded-lg">
+    <div className="p-4 border rounded-xl">
       <div className="rounded-lg bg-white">
         {!showForm ? (
           <div className="flex items-center gap-3">
             <h3 className="text-lg font-semibold">Mavzular</h3>
-
             <Button variant="outline" onClick={() => setShowForm(true)}>
               <Plus />
             </Button>

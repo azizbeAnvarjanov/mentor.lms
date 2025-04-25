@@ -64,7 +64,7 @@ export default function VideoUpload({
     <div className="p-4 bg-white border rounded-xl space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Video joylash</h2>
-        <Button onClick={() => setShowForm(!showForm)}>
+        <Button variant={"outline"} onClick={() => setShowForm(!showForm)}>
           {showForm ? "Yopish" : "Video qo‘shish"} <CircleFadingPlus />
         </Button>
       </div>
@@ -102,7 +102,7 @@ export default function VideoUpload({
                 value={videoLink}
                 onChange={(e) => setVideoLink(e.target.value)}
               />
-              <Button onClick={handleAddVideo} disabled={loading}>
+              <Button onClick={handleAddVideo} variant={"outline"} disabled={loading}>
                 {loading ? "Yuklanmoqda..." : "Joylash"}
               </Button>
             </>

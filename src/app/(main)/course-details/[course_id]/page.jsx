@@ -51,12 +51,12 @@ export default function CourseDetailsPage() {
                   <Input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Kurs nomi"
+                    placeholder="Fan nomi"
                   />
                   <Textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Kurs tavsifi"
+                    placeholder="Fan tavsifi"
                   />
                   <div className="flex gap-2">
                     <Button

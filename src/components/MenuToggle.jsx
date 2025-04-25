@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function MenuToggle({ ppt, handleDelete }) {
-  console.log(ppt);
   
   return (
     <DropdownMenu>

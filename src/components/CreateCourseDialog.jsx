@@ -22,7 +22,6 @@ import {
 import { CircleFadingPlus } from "lucide-react";
 
 export default function CreateCourseDialog({ teacher }) {
-  console.log(teacher);
 
   const [name, setName] = useState("");
   const [level, setLevel] = useState("1");

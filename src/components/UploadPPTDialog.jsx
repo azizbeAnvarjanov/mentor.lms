@@ -132,7 +132,6 @@ export default function ChapterPPTUploader({ chapterId }) {
       const fileName = decodeURIComponent(parts[parts.length - 1]);
 
       const filePath = `ppt/${chapterId}/${fileName}`;
-      console.log("Storage fayl yo‘li:", filePath);
 
       // Storage'dan faylni o‘chirish
       const { error: storageError } = await supabase.storage

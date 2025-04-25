@@ -132,7 +132,6 @@ export default function UploadPDFDialog({ chapterId }) {
       const fileName = decodeURIComponent(parts[parts.length - 1]);
 
       const filePath = `pdf/${chapterId}/${fileName}`;
-      console.log("Storage fayl yo‘li:", filePath);
 
       // Storage'dan faylni o‘chirish
       const { error: storageError } = await supabase.storage

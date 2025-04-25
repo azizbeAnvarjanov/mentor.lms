@@ -57,7 +57,7 @@ export default function ChapterEdit() {
             {/* Name */}
             <div>
               {editName ? (
-                <div className="border bg-white  p-3 rounded-sm">
+                <div className="border bg-white p-3 rounded-xl">
                   <div className="flex items-center justify-between mb-2">
                     <h1 className="text-sm font-medium">Mavzu nomi</h1>
                     <Button size={"sm"} onClick={() => setEditName(false)}>
@@ -70,7 +70,7 @@ export default function ChapterEdit() {
                   />
                 </div>
               ) : (
-                <div className="border bg-white  p-3 rounded-sm">
+                <div className="border bg-white  p-3 rounded-xl">
                   <div className="flex items-center justify-between">
                     <h1 className="text-sm font-medium">Mavzu nomi</h1>
 
@@ -88,7 +88,7 @@ export default function ChapterEdit() {
             {/* Description */}
             <div>
               {editDescription ? (
-                <div className="mt-4 bg-white border  p-3 rounded-sm">
+                <div className="mt-4 bg-white border  p-3 rounded-xl">
                   <div className="flex items-center justify-between mb-2">
                     <h1 className="font-medium">Mavzu tavsifi</h1>
                     <Button size="sm" onClick={() => setEditDescription(false)}>
@@ -101,7 +101,7 @@ export default function ChapterEdit() {
                   />
                 </div>
               ) : (
-                <div className="mt-4 bg-white border  p-3 rounded-sm">
+                <div className="mt-4 bg-white border  p-3 rounded-xl">
                   <div className="flex items-center justify-between">
                     <h1 className="font-medium">Chapter tavsifi</h1>
                     <Button
@@ -122,13 +122,12 @@ export default function ChapterEdit() {
                 </div>
               )}
             </div>
-            <br />
             <TabsFiles chapter_id={chapter_id}/>
           </div>
         </div>
         <div className="w-[50%]">
           {/* Status */}
-          <div className="flex items-center gap-4 p-3 mb-3 bg-white  border rounded-md justify-between">
+          <div className="flex items-center gap-4 p-3 mb-3 bg-white  border rounded-xl justify-between">
             <label className="text-sm font-medium">Mavzu statusi</label>
             <Switch
               checked={status}
