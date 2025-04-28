@@ -11,7 +11,7 @@ import { ModeToggle } from "./ModeToggle";
 export default function Navbar() {
   const { user, teacher, loading } = useTeacher();
 
-  if (loading) return <Skeleton className="h-16 border-b"></Skeleton>;
+  if (loading) return <Skeleton className="h-16 border-b rounded-none"></Skeleton>;
   if (!teacher) return <div>No student data</div>;
 
   return (
