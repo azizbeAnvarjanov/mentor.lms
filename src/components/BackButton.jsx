@@ -14,5 +14,9 @@ export default function BackButton() {
     }
   };
 
-  return <Button onClick={handleBack} variant={"outline"}><ChevronLeft /></Button>;
+  return (
+    <Button onClick={handleBack}>
+      <ChevronLeft />
+    </Button>
+  );
 }
