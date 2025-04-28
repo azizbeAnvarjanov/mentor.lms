@@ -139,13 +139,12 @@ export function ImportExcelDialog() {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
-          className="w-full h-32 border-2 border-dashed border-gray-400 rounded flex items-center justify-center text-gray-600 text-sm mb-4"
+          className="w-full h-32 border-2 border-dashed border-gray-400 rounded flex items-center justify-center  text-sm mb-4"
         >
           Faylni shu yerga tashlang
         </div>
 
         <Button
-          variant="secondary"
           className="w-full mb-2"
           onClick={() => fileInputRef.current.click()}
           disabled={loading}

@@ -351,7 +351,7 @@ export default function TestDetailsPage() {
                 onValueChange={handleChangeStatus}
                 disabled={loading}
               >
-                <SelectTrigger className="w-[200px] text-black">
+                <SelectTrigger className="w-[200px]">
                   <SelectValue
                     placeholder={
                       String(testStatus) === "true" ? "Faol" : "No faol"
@@ -373,7 +373,7 @@ export default function TestDetailsPage() {
           </div>
           <div className="overflow-auto">
             <Table>
-              <TableHeader className="sticky top-0 bg-white z-10">
+              <TableHeader className="sticky top-0  z-10">
                 <TableRow>
                   <TableHead className="text-center">
                     <Checkbox
