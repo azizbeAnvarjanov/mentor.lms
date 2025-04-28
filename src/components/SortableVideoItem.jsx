@@ -30,7 +30,7 @@ export const SortableVideoItem = ({ video, onSave, handleDeleteVideo }) => {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="flex items-center gap-2 p-3 border rounded-md bg-gray-50"
+      className="flex items-center gap-2 p-3 border rounded-md "
     >
       <div {...listeners} className="cursor-grab">
         <Grip className="text-gray-500" />

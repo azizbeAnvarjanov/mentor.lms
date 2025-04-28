@@ -41,9 +41,9 @@ export default function CoursesContent() {
               <Link
                 href={`/course-details/${course.course_id}`}
                 key={course.id}
-                className="rounded-xl border overflow-hidden shadow-md bg-white max-w-sm"
+                className="rounded-xl border overflow-hidden shadow-md max-w-sm"
               >
-                <div className="w-full h-48 overflow-hidden relative border-b border-gray-300">
+                <div className="w-full h-48 overflow-hidden relative border-b border-gray-300 dark:border-gray-600">
                   <img
                     src={course.banner_url || "/placeholder.jpg"}
                     alt={course.name}

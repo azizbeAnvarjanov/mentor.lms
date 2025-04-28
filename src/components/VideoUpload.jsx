@@ -61,7 +61,7 @@ export default function VideoUpload({
   );
 
   return (
-    <div className="p-4 bg-white border rounded-md space-y-4">
+    <div className="p-4 border rounded-md space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Video joylash</h2>
         <Button variant={"outline"} onClick={() => setShowForm(!showForm)}>
@@ -72,7 +72,7 @@ export default function VideoUpload({
 
       {showForm && (
         <div className="space-y-2">
-          <div className="space-y-2 bg-white">
+          <div className="space-y-2">
             <Label>Joylash turi:</Label>
             <Select value={uploadType} onValueChange={setUploadType}>
               <SelectTrigger className="w-full">

@@ -33,7 +33,7 @@ export default function AvatarNavbar({ user, teacher }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
-          <Avatar className="flex items-center justify-center bg-muted border-2 text-sm">
+          <Avatar className="flex items-center justify-center bg-muted dark:bg-[#1a1919] border-2 text-sm">
             <div className="">{av}</div>
           </Avatar>
         </Button>

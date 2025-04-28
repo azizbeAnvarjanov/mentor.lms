@@ -39,7 +39,7 @@ function SortableChapter({ chapter, course_id }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="flex items-center justify-between bg-gray-100 p-2 rounded-md border mb-2"
+      className="flex items-center justify-between p-2 rounded-md border mb-2"
     >
       <div className="flex gap-2 items-center justify-between w-full">
         <div className="flex items-center gap-3">
@@ -147,7 +147,7 @@ const CreateChapterForm = ({ course_id }) => {
 
   return (
     <div className="p-4 border rounded-md">
-      <div className="rounded-lg bg-white">
+      <div className="rounded-lg ">
         {!showForm ? (
           <div className="flex items-center gap-3">
             <h3 className="text-lg font-semibold">Mavzular</h3>
@@ -184,7 +184,7 @@ const CreateChapterForm = ({ course_id }) => {
       </div>
       <br />
       {chapters.length > 0 && (
-        <div className="rounded-lg bg-white">
+        <div className="rounded-lg">
           <DndContext
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}

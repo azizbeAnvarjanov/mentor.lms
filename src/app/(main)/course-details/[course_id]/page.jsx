@@ -44,7 +44,6 @@ export default function CourseDetailsPage() {
       <BackButton />
       <div className="mx-auto gap-4 flex relative mt-3">
         <div className="w-[40%]">
-
           <div className="relative border p-4 rounded-md">
             {editing ? (
               <>
@@ -53,11 +52,13 @@ export default function CourseDetailsPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Fan nomi"
                 />
+                <br />
                 <Textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Fan tavsifi"
                 />
+                <br />
                 <div className="flex gap-2">
                   <Button
                     onClick={() => {

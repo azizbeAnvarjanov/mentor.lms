@@ -174,7 +174,7 @@ export default function UploadPDFDialog({ chapterId }) {
         <div className="flex items-center gap-1 ">
           <Button
             onClick={() => setOpen(true)}
-            className="bg-muted mr-2 text-black border hover:bg-muted"
+            className="bg-muted mr-2 text-black dark:text-white border hover:bg-muted"
           >
             <CircleFadingPlus />
             Yuklash
@@ -183,7 +183,7 @@ export default function UploadPDFDialog({ chapterId }) {
             onClick={() => setGrid("list")}
             variant="outline"
             className={`hover:bg-muted ${
-              grid === "list" ? "bg-muted text-black border" : ""
+              grid === "list" ? "bg-muted text-black border dark:text-white" : ""
             }`}
           >
             <WrapText strokeWidth={1.5} />
@@ -192,7 +192,7 @@ export default function UploadPDFDialog({ chapterId }) {
             onClick={() => setGrid("grid")}
             variant="outline"
             className={`hover:bg-muted  ${
-              grid === "grid" ? "bg-muted text-black border" : ""
+              grid === "grid" ? "bg-muted text-black border dark:text-white" : ""
             }`}
           >
             <LayoutGrid strokeWidth={1.5} />

@@ -107,7 +107,7 @@ export default function TestCreator() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-medium">Testlar</h1>
         <Button variant={"outline"} onClick={() => setShowForm(!showForm)}>
@@ -169,12 +169,13 @@ export default function TestCreator() {
                     onClick={() => handleDeletetest(test.id)}
                     variant={"outline"}
                     size={"sm"}
+                    className={"w-[35px] h-[35px] bg-white dark:bg-[#363636]"}
                   >
                     <Trash />
                   </Button>
                   <Link
                     href={`/test-details/${test.id}`}
-                    className="border p-2 rounded-md bg-white"
+                    className="border p-2 w-[35px] h-[35px] rounded-md bg-white dark:bg-[#363636]"
                   >
                     <Pen size={16} />
                   </Link>
