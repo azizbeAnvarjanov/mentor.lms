@@ -6,7 +6,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import Link from "next/link";
-import { Paperclip, Pen, Trash } from "lucide-react";
+import { CircleFadingPlus, Paperclip, Pen, Trash } from "lucide-react";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -111,6 +111,7 @@ export default function TestCreator() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-medium">Testlar</h1>
         <Button variant={"outline"} onClick={() => setShowForm(!showForm)}>
+          <CircleFadingPlus />
           {showForm ? "Bekor qilish" : "Test yaratish"}
         </Button>
       </div>
@@ -151,22 +152,29 @@ export default function TestCreator() {
             {tests.map((test) => (
               <li
                 key={test.id}
-                className="p-3 border rounded-md hover:bg-gray-50 transition flex items-center justify-between text-sm"
+                className="p-2 border rounded-md bg-muted transition flex items-center justify-between text-sm"
               >
-                <div className="font-medium">{test.name}</div>
-                <div className="flex items-center gap-3">
-                  <div className="bg-red-500 px-2 rounded-full text-white">
-                    {test.test_status !== "false" ? "faol emas" : "faol"}
+                <div className="font-medium ml-2">{test.name}</div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`${
+                      test.test_status === "true"
+                        ? "bg-green-500"
+                        : "bg-gray-500"
+                    } px-2 rounded-full text-white`}
+                  >
+                    {test.test_status === "true" ? "Faol" : "Faol emas"}
                   </div>
                   <Button
                     onClick={() => handleDeletetest(test.id)}
                     variant={"outline"}
+                    size={"sm"}
                   >
                     <Trash />
                   </Button>
                   <Link
                     href={`/test-details/${test.id}`}
-                    className="border p-2 rounded-md"
+                    className="border p-2 rounded-md bg-white"
                   >
                     <Pen size={16} />
                   </Link>

@@ -26,7 +26,6 @@ export default function BannerUpload({ courseId, bannerUrl, onBannerChange }) {
     }
   }, [bannerUrl]);
 
-
   const handleDelete = async () => {
     await deleteBanner({
       url,
@@ -40,62 +39,50 @@ export default function BannerUpload({ courseId, bannerUrl, onBannerChange }) {
   };
 
   return (
-    <Card className=" mt-6">
-      <CardContent>
-        <Label className="block text-lg font-medium">Kurs banner rasmi</Label>
-        <br />
-        {url && (
-          <div className="relative h-80 rounded-md overflow-hidden border group">
-            {imageLoading && (
-              <Skeleton className="absolute top-0 left-0 w-full h-full z-0" />
-            )}
-            <Image
-              src={url}
-              alt="Banner"
-              fill
-              className="object-contain z-10"
-              onLoad={() => setImageLoading(false)}
-            />
-
-            {/* Hover qilinganda chiqadigan overlay */}
-            {!uploading && (
-              <div className="absolute inset-0 bg-white/50 backdrop-blur-sm flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button
-                  variant="destructive"
-                  onClick={handleDelete}
-                  className="z-30"
-                >
-                  <Trash />
-                </Button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {uploading && (
-          <div>
-            <Progress value={progress} />
-            <div className="text-sm text-muted-foreground mt-1">
-              {progress}%
-            </div>
-          </div>
-        )}
-
-        {/* {!url && !uploading && (
-          <Input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+    <div className="p-3 border mt-4 rounded-md">
+      <Label className="block text-lg font-medium mb-3">
+        Kurs banner rasmi
+      </Label>
+      {url && (
+        <div className="relative h-80 rounded-md overflow-hidden group">
+          {imageLoading && (
+            <Skeleton className="absolute top-0 left-0 w-full h-full z-0" />
+          )}
+          <Image
+            src={url}
+            alt="Banner"
+            fill
+            className="object-contain z-10"
+            onLoad={() => setImageLoading(false)}
           />
-        )} */}
 
-        <InputUploadBanner
-          courseId={courseId}
-          onBannerChange={onBannerChange}
-          bannerUrl={bannerUrl}
-        />
-      </CardContent>
-    </Card>
+          {/* Hover qilinganda chiqadigan overlay */}
+          {!uploading && (
+            <div className="absolute inset-0 bg-white/50 backdrop-blur-sm flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <Button
+                variant="destructive"
+                onClick={handleDelete}
+                className="z-30"
+              >
+                <Trash />
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {uploading && (
+        <div>
+          <Progress value={progress} />
+          <div className="text-sm text-muted-foreground mt-1">{progress}%</div>
+        </div>
+      )}
+
+      <InputUploadBanner
+        courseId={courseId}
+        onBannerChange={onBannerChange}
+        bannerUrl={bannerUrl}
+      />
+    </div>
   );
 }

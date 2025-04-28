@@ -43,7 +43,9 @@ export default function CoursePublishToggle({
         .eq("chapter_status", true);
 
       if (chapterError) {
-        toast.error("Chapterlarni tekshirishda xatolik: " + chapterError.message);
+        toast.error(
+          "Chapterlarni tekshirishda xatolik: " + chapterError.message
+        );
         return;
       }
 
@@ -72,25 +74,23 @@ export default function CoursePublishToggle({
   };
 
   return (
-    <Card>
-      <CardContent>
-        <label className="block mb-2 text-sm font-medium">Kurs holati</label>
-        <Select value={status} onValueChange={handleStatusChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Statusni tanlang" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="published">
-              <div className="w-[10px] h-[10px] bg-green-400 rounded-full"></div>
-              Nashr etilgan
-            </SelectItem>
-            <SelectItem value="unpublished">
-              <div className="w-[10px] h-[10px] bg-red-400 rounded-full"></div>
-              Nashr etilmagan
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </CardContent>
-    </Card>
+    <div className="p-4 border mt-4 rounded-md">
+      <label className="block mb-2 text-sm font-medium">Kurs holati</label>
+      <Select value={status} onValueChange={handleStatusChange}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Statusni tanlang" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="published">
+            <div className="w-[10px] h-[10px] bg-green-400 rounded-full"></div>
+            Nashr etilgan
+          </SelectItem>
+          <SelectItem value="unpublished">
+            <div className="w-[10px] h-[10px] bg-red-400 rounded-full"></div>
+            Nashr etilmagan
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

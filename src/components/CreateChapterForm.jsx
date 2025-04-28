@@ -146,7 +146,7 @@ const CreateChapterForm = ({ course_id }) => {
   };
 
   return (
-    <div className="p-4 border rounded-xl">
+    <div className="p-4 border rounded-md">
       <div className="rounded-lg bg-white">
         {!showForm ? (
           <div className="flex items-center gap-3">

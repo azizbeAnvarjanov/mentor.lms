@@ -83,7 +83,7 @@ export default function InputUploadBanner({
             ) : (
               <div className="flex flex-col items-center justify-center px-4 py-3 text-center">
                 <div
-                  className="bg-background mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-gray-400 borderda"
+                  className="bg-background mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border-gray-400"
                   aria-hidden="true"
                 >
                   <ImageUpIcon className="size-4 opacity-60" />

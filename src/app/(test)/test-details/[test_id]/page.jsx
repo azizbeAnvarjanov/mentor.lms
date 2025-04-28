@@ -26,11 +26,19 @@ import { Download, Pen, Trash } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import BackButton from "@/components/BackButton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function TestDetailsPage() {
   const params = useParams();
   const test_id = params.test_id;
   const [question, setQuestion] = useState("");
+  const [testStatus, setTestStatus] = useState(false);
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctIndex, setCorrectIndex] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,11 +58,29 @@ export default function TestDetailsPage() {
       .order("created_at", { ascending: false });
 
     if (error) console.error(error);
-    else setQuestionList(data);
+    else {
+      setQuestionList(data);
+    }
   };
 
   useEffect(() => {
     if (test_id) fetchQuestions();
+  }, [test_id]);
+
+  const fetchStatus = async () => {
+    const { data, error } = await supabase
+      .from("tests_duplicate")
+      .select("test_status")
+      .eq("id", test_id);
+    if (error) {
+      console.error(error);
+    } else {
+      setTestStatus(data[0]?.test_status);
+      console.log(data[0]?.test_status);
+    }
+  };
+  useEffect(() => {
+    fetchStatus();
   }, [test_id]);
 
   const handleOptionChange = (value, index) => {
@@ -179,6 +205,62 @@ export default function TestDetailsPage() {
     );
   };
 
+  const handleChangeStatus = async (value) => {
+    try {
+      setLoading(true);
+
+      if (value === "true") {
+        // Faollashtirish uchun oldin questionsni tekshiramiz
+        const {
+          data: questionData,
+          error: questionError,
+        } = await supabase.from("questions").select("*").eq("test_id", test_id);
+
+        if (questionError) {
+          console.error(questionError);
+          toast.error("Savollarni yuklashda xato");
+          return;
+        }
+
+        if (questionData.length > 0) {
+          const { error: updateError } = await supabase
+            .from("tests_duplicate")
+            .update({ test_status: true })
+            .eq("id", test_id);
+
+          if (updateError) {
+            console.error(updateError);
+            toast.error("Statusni faollashtirishda xato yuz berdi");
+          } else {
+            fetchStatus();
+            toast.success("Test faollashtirildi!");
+          }
+        } else {
+          toast.error("Savollar mavjud emas, avval savol yarating");
+        }
+      } else if (value === "false") {
+        // No faol qilish uchun savolni tekshirish shart emas
+        const { error: updateError } = await supabase
+          .from("tests_duplicate")
+          .update({ test_status: false })
+          .eq("id", test_id);
+
+        if (updateError) {
+          console.error(updateError);
+          toast.error("Statusni nofaol qilishda xato yuz berdi");
+        } else {
+          fetchStatus();
+          toast.success("Test nofaol qilindi!");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Xato yuz berdi");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ResizablePanelGroup direction="horizontal" className="">
       <ResizablePanel defaultSize={20} minSize={20}>
@@ -252,8 +334,8 @@ export default function TestDetailsPage() {
                 disabled={selectedQuestions.length === 0}
                 onClick={handleDeleteMultiple}
               >
-                O'chirish
                 <Trash />
+                O'chirish
               </Button>
               <Button
                 className="font-normal"
@@ -261,9 +343,32 @@ export default function TestDetailsPage() {
                 onClick={handleExport}
                 disabled={questionList.length === 0}
               >
-                Eksport
                 <Download />
+                Eksport
               </Button>
+              <Select
+                value={String(testStatus)}
+                onValueChange={handleChangeStatus}
+                disabled={loading}
+              >
+                <SelectTrigger className="w-[200px] text-black">
+                  <SelectValue
+                    placeholder={
+                      String(testStatus) === "true" ? "Faol" : "No faol"
+                    }
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="true">
+                    <div className="w-[10px] h-[10px] bg-green-400 rounded-full"></div>
+                    Faol
+                  </SelectItem>
+                  <SelectItem value="false">
+                    <div className="w-[10px] h-[10px] bg-red-400 rounded-full"></div>
+                    No faol
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <div className="overflow-auto">

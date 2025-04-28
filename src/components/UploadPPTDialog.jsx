@@ -176,7 +176,8 @@ export default function ChapterPPTUploader({ chapterId }) {
             onClick={() => setOpen(true)}
             className="bg-muted mr-2 text-black border hover:bg-muted"
           >
-            Yuklash <CircleFadingPlus />
+            <CircleFadingPlus />
+            Yuklash 
           </Button>
           <Button
             onClick={() => setGrid("list")}

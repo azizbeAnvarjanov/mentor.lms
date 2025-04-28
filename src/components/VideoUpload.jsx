@@ -61,11 +61,12 @@ export default function VideoUpload({
   );
 
   return (
-    <div className="p-4 bg-white border rounded-xl space-y-4">
+    <div className="p-4 bg-white border rounded-md space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Video joylash</h2>
         <Button variant={"outline"} onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Yopish" : "Video qo‘shish"} <CircleFadingPlus />
+          <CircleFadingPlus />
+          {showForm ? "Yopish" : "Video qo‘shish"} 
         </Button>
       </div>
 
