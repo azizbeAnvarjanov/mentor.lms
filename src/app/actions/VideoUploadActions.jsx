@@ -14,6 +14,13 @@ export function useVideoUploadingDetails(chapter_id, setVideosLength) {
   const [tab, setTab] = useState("view");
   const [showForm, setShowForm] = useState(false); // Formani ko‘rsatish uchun
 
+  function generateRandomBigInt(min = 1001n, max = 999999999999999n) {
+    const range = max - min + 1n;
+    const rand = BigInt(Math.floor(Math.random() * Number(range)));
+    return min + rand;
+  }
+
+
   const fetchVideos = async () => {
     const { data, error } = await supabase
       .from("videos")
@@ -47,6 +54,7 @@ export function useVideoUploadingDetails(chapter_id, setVideosLength) {
 
     const { error } = await supabase.from("videos").insert([
       {
+        id: generateRandomBigInt().toString(),
         chapter_id,
         video_link: videoLink,
         name: videoName,
@@ -56,6 +64,7 @@ export function useVideoUploadingDetails(chapter_id, setVideosLength) {
 
     if (error) {
       toast.error("Video saqlanmadi");
+      console.error(error);
     } else {
       toast.success("Video qo‘shildi");
       setVideoLink("");

@@ -47,8 +47,14 @@ export default function TestDetailsPage() {
   const [editQuestionId, setEditQuestionId] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-
   const supabase = createClient();
+  
+  function generateRandomBigInt(min = 1001n, max = 999999999999999n) {
+    const range = max - min + 1n;
+    const rand = BigInt(Math.floor(Math.random() * Number(range)));
+    return min + rand;
+  }
+
 
   const fetchQuestions = async () => {
     const { data, error } = await supabase
@@ -119,7 +125,16 @@ export default function TestDetailsPage() {
         option_text: opt,
         is_correct: i === correctIndex,
       }));
-      await supabase.from("options").insert(updatedOptions);
+      const { error: insertError } =  await supabase
+        .from("options")
+        .insert(updatedOptions);
+
+      if (insertError) {
+        console.error(insertError);
+        alert("Variantlar yaratishda xatolik");
+        setLoading(false);
+        return;
+      }
       resetForm();
       await fetchQuestions();
     } else {
@@ -137,12 +152,22 @@ export default function TestDetailsPage() {
       }
 
       const newOptions = options.map((opt, i) => ({
+        id: generateRandomBigInt().toString(),
         question_id: qData.id,
         option_text: opt,
         is_correct: i === correctIndex,
       }));
 
-      await supabase.from("options").insert(newOptions);
+      const { error: insertError } = await supabase
+        .from("options")
+        .insert(newOptions);
+
+      if (insertError) {
+        console.error(insertError);
+        alert("Variantlar yaratishda xatolik");
+        setLoading(false);
+        return;
+      }
     }
 
     await fetchQuestions();
@@ -155,7 +180,13 @@ export default function TestDetailsPage() {
     if (!confirm) return;
 
     for (const qId of selectedQuestions) {
-      await supabase.from("options").delete().eq("question_id", qId);
+      const { error: deleteError } = await supabase.from("options").delete().eq("question_id", qId);
+      if (deleteError) {
+        console.error(deleteError);
+        alert("Variantlar o'chirishda xatolik");
+        setLoading(false);
+        return;
+      }
       await supabase.from("questions").delete().eq("id", qId);
     }
 
@@ -387,7 +418,6 @@ export default function TestDetailsPage() {
                   <TableHead>Variant C</TableHead>
                   <TableHead>Variant D</TableHead>
                   <TableHead>To‘g‘ri javob</TableHead>
-                  <TableHead>Amallar</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -415,11 +445,11 @@ export default function TestDetailsPage() {
                       <TableCell className="text-green-600 font-semibold max-w-[100px]">
                         <p className="line-clamp-1">{correct}</p>
                       </TableCell>
-                      <TableCell className="max-w-[10px] min-w-[10px]">
+                      {/* <TableCell className="max-w-[10px] min-w-[10px]">
                         <Button variant="ghost" onClick={() => handleEdit(q)}>
                           <Pen />
                         </Button>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}

@@ -26,6 +26,12 @@ export function ImportExcelDialog() {
   const [progress, setProgress] = useState(0);
   const fileInputRef = useRef(null);
 
+  function generateRandomBigInt(min = 1001n, max = 999999999999999n) {
+    const range = max - min + 1n;
+    const rand = BigInt(Math.floor(Math.random() * Number(range)));
+    return min + rand;
+  }
+
   const handleFile = async (file) => {
     try {
       setLoading(true);
@@ -61,7 +67,11 @@ export function ImportExcelDialog() {
 
             const { data: question, error: qError } = await supabase
               .from("questions")
-              .insert({ question_text: questionText, test_id: test_id })
+              .insert({
+                id: generateRandomBigInt().toString(),
+                question_text: questionText,
+                test_id: test_id,
+              })
               .select()
               .single();
 
@@ -69,6 +79,7 @@ export function ImportExcelDialog() {
               throw new Error("Savol qo‘shishda xatolik: " + qError.message);
 
             const options = [a, b, c, d].map((text, index) => ({
+              id: generateRandomBigInt().toString(),
               question_id: question.id,
               option_text: text,
               is_correct: Number(correctIndexStr) === index + 1,

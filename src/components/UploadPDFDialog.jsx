@@ -264,7 +264,7 @@ export default function UploadPDFDialog({ chapterId }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>PPT yuklash</DialogTitle>
+            <DialogTitle>PDF yuklash</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
@@ -273,11 +273,11 @@ export default function UploadPDFDialog({ chapterId }) {
                 id="pptName"
                 value={pptName}
                 onChange={(e) => setPptName(e.target.value)}
-                placeholder="Masalan: Mavzu prezentatsiyasi"
+                placeholder="Masalan: Mavzu pdf fayli"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="file">Fayl tanlang (.ppt yoki .pptx)</Label>
+              <Label htmlFor="file">Fayl tanlang (.pdf)</Label>
               <Input
                 id="file"
                 type="file"

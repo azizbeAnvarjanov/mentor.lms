@@ -21,6 +21,10 @@ export default function TestCreator() {
   const supabase = createClient();
   console.log(tests);
 
+  function generateRandom8DigitNumber() {
+    return Math.floor(10000000 + Math.random() * 90000000).toString();
+  }
+
   // Yaratilgan testlarni olish
   const fetchTests = async () => {
     const { data, error } = await supabase
@@ -45,8 +49,10 @@ export default function TestCreator() {
 
     setLoading(true);
 
+    const id = generateRandom8DigitNumber();
     const { data, error } = await supabase.from("tests_duplicate").insert([
       {
+        id,
         name: title,
         time_limit: timeLimit,
         chapter_id: chapter_id,
