@@ -21,13 +21,8 @@ const generateChapterId = () => {
 };
 
 function SortableChapter({ chapter, course_id }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id: chapter.chapter_id });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: chapter.chapter_id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -98,9 +93,11 @@ const CreateChapterForm = ({ course_id }) => {
 
     setLoading(true);
     const chapter_id = generateChapterId();
+    const id = generateChapterId();
 
     const { data, error } = await supabase.from("chapters").insert([
       {
+        id,
         chapter_id,
         course_id,
         name: name.trim(),
