@@ -31,7 +31,7 @@ export default function CoursePublishToggle({
     if (value === "published") {
       // 1. Tekshir: banner borligiga
       if (!bannerUrl) {
-        toast.error("Banner mavjud emas. Avval banner yuklang!");
+        toast.error("Fan benner rasmi mavjud emas. Avval rasmni yuklang!");
         return;
       }
 
@@ -44,14 +44,14 @@ export default function CoursePublishToggle({
 
       if (chapterError) {
         toast.error(
-          "Chapterlarni tekshirishda xatolik: " + chapterError.message
+          "Mavzularni tekshirishda xatolik: " + chapterError.message
         );
         return;
       }
 
       if (!chapters || chapters.length === 0) {
         toast.error(
-          "Hech bo‘lmasa bitta 'Published' holatidagi mavzu (chapter) mavjud emas!"
+          "Faol mavzular mavjud emas!"
         );
         return;
       }

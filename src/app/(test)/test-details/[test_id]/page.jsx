@@ -278,10 +278,10 @@ export default function TestDetailsPage() {
 
         if (updateError) {
           console.error(updateError);
-          toast.error("Statusni nofaol qilishda xato yuz berdi");
+          toast.error("Xato yuz berdi");
         } else {
           fetchStatus();
-          toast.success("Test nofaol qilindi!");
+          toast.success("Muvafaqiyatli saqlandi!");
         }
       }
     } catch (error) {

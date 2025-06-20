@@ -38,7 +38,7 @@ export function useChapterDetails(chapter_id) {
         .maybeSingle();
 
       if (error || !data) {
-        toast.error("Chapter topilmadi");
+        toast.error("Mavzu topilmadi");
         return;
       }
 
